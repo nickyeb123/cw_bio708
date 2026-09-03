@@ -93,3 +93,5 @@ iris_sub
 iris_sub |> 
   group_by(Species) |> 
   summarize(mu_sl = mean(Sepal.Length))
+
+
