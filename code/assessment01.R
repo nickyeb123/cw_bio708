@@ -96,11 +96,22 @@ n_make
 # 14: Convert the `cyl` column from numeric to factor using `factor()`.  
 # Add it to `df_mtcars` as a new column named `f_cyl` using `mutate()` function.
 # Use ?factor() for the usage of factor() function.
+?factor
+df_mtcars <- df_mtcars |> 
+  mutate(f_cyl = factor(cyl))
 
+f_cyl <- df_mtcars
+f_cyl
+  
 # 15: Draw a box plot showing car weight (`wt`) for each number of cylinders (`f_cyl`).
+df_mtcars |> 
+  ggplot(aes(x = wt,
+             y = f_cyl)) + 
+  geom_boxplot()
 
 # 16: Calculate the average car weight (`wt`) separately for each number of cylinders (`cyl`).
 # Hint - `group_by()` and `summarize()` functions.
+
 
 # 17: Identify the heaviest car make (`wt`) among cars with 6 cylinders (`cyl`).
 # Hint - `filter()` and `arrange()` functions.
