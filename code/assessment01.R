@@ -21,7 +21,8 @@ v_abc100
 # Select only the positive numbers (> 0) from `v_x`, calculate their mean, and assign it to `mu_x_plus`.
 set.seed(100)
 v_x <- rnorm(100)
-v_x[v_x > 0]
+mu_x_plus <- v_x[v_x > 0]
+
 
 # 4: Create a numeric matrix with the numbers 1 through 9 arranged in 3 rows × 3 columns.  
 # Assign it to `m_num`.
@@ -30,8 +31,8 @@ m_num
 
 # 5: Create a base R data frame (`data.frame()` function) using `v_x` and `v_abc100`.  
 # Name the columns `"x"` for `v_x` and `"group"` for `v_abc100`, and assign it to `df_sample`.
-df0 <- data.frame(x = v_x, y = v_abc100)
-df0
+df_sample <- data.frame(x = v_x, group = v_abc100)
+df_sample
 
 
 # tidyverse ---------------------------------------------------------------
@@ -70,8 +71,8 @@ v_make <- rownames(df_mtcars)
 v_make
 
 # 10: Add `v_make` as a new column to `df_mtcars` and name the column `"make"`.
-make <-v_make
-mutate(df_mtcars, row_id = make)
+df_mtcars |> 
+  mutate(make = v_make)
 
 # 11: Filter `df_mtcars` to include only rows where:  
 # - `mpg` is less than 20 AND  
@@ -104,8 +105,8 @@ df_mtcars <- df_mtcars |>
   
 # 15: Draw a box plot showing car weight (`wt`) for each number of cylinders (`f_cyl`).
 df_mtcars |> 
-  ggplot(aes(x = wt,
-             y = f_cyl)) + 
+  ggplot(aes(x = f_cyl,
+             y = wt)) + 
   geom_boxplot()
 
 # 16: Calculate the average car weight (`wt`) separately for each number of cylinders (`cyl`).
@@ -120,12 +121,14 @@ df_mtcars |>
 # Hint - `filter()` and `arrange()` functions.
 df_mtcars |> 
   filter(cyl == 6) |> 
-  arrange(desc(wt))
+  arrange(desc(wt)) |> 
+  select(wt)
 
 # 18: Create a histogram showing the distribution of 1/4 mile time (`qsec`).
 df_mtcars |> 
   ggplot(aes(x = qsec)) + 
   geom_histogram()
+
 
 # 19: The following script reads two tibbles:
 # one containing fish length data and the other containing fish weight data.
@@ -134,6 +137,7 @@ df_mtcars |>
 # Assign the resulting data frame to `df_fish`.
 df_fish <- df_l |> 
   left_join(df_w, by = c("species", "individual"))
+df_fish
 
 df_l <- read_csv("data_src/data_length_assess01.csv")
 df_w <- read_csv("data_src/data_weight_assess01.csv")
@@ -144,4 +148,4 @@ df_fish |>
   ggplot(aes(x = length,
              y = weight,
              color = species)) + 
-  geom_point()
+  geom_point() 
