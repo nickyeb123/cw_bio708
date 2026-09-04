@@ -30,8 +30,9 @@ m_num
 
 # 5: Create a base R data frame (`data.frame()` function) using `v_x` and `v_abc100`.  
 # Name the columns `"x"` for `v_x` and `"group"` for `v_abc100`, and assign it to `df_sample`.
-df0 <- data.frame(v_x = x, v_abc100 = y)
+df0 <- data.frame(x = v_x, y = v_abc100)
 df0
+
 
 # tidyverse ---------------------------------------------------------------
 
@@ -100,8 +101,6 @@ n_make
 df_mtcars <- df_mtcars |> 
   mutate(f_cyl = factor(cyl))
 
-f_cyl <- df_mtcars
-f_cyl
   
 # 15: Draw a box plot showing car weight (`wt`) for each number of cylinders (`f_cyl`).
 df_mtcars |> 
@@ -111,21 +110,38 @@ df_mtcars |>
 
 # 16: Calculate the average car weight (`wt`) separately for each number of cylinders (`cyl`).
 # Hint - `group_by()` and `summarize()` functions.
+print(df_mtcars)
+df_mtcars |> 
+  group_by(cyl) |> 
+  summarize(mu_wt = mean(wt))
 
 
 # 17: Identify the heaviest car make (`wt`) among cars with 6 cylinders (`cyl`).
 # Hint - `filter()` and `arrange()` functions.
+df_mtcars |> 
+  filter(cyl == 6) |> 
+  arrange(desc(wt))
 
 # 18: Create a histogram showing the distribution of 1/4 mile time (`qsec`).
+df_mtcars |> 
+  ggplot(aes(x = qsec)) + 
+  geom_histogram()
 
 # 19: The following script reads two tibbles:
 # one containing fish length data and the other containing fish weight data.
 # Combine the two data frames by matching the `species` and `individual` columns
 # so that the length and weight measurements for each fish are aligned.
 # Assign the resulting data frame to `df_fish`.
+df_fish <- df_l |> 
+  left_join(df_w, by = c("species", "individual"))
 
 df_l <- read_csv("data_src/data_length_assess01.csv")
 df_w <- read_csv("data_src/data_weight_assess01.csv")
 
 # 20: Draw a scatter plot (point plot) of `length` vs. `weight` from `df_fish`,  
 # coloring the points by `species`
+df_fish |> 
+  ggplot(aes(x = length,
+             y = weight,
+             color = species)) + 
+  geom_point()
