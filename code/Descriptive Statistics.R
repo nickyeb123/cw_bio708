@@ -84,3 +84,25 @@ mycv
 mycv(x)
 
 mycv1(x)
+
+z <- c(1, 7, 6, 5, 2) 
+sum(1, 7, 6, 5, 2)
+mean(z)
+
+s <- sqrt(sum((z - mean(z))^2) / length(z))
+s
+
+b <- c(410, 350, 380, 420, 530)
+n <- c(1, 6, 5, 7, 6)
+530 - 350
+
+m <- b*n
+m
+
+length(m)
+
+sqrt(sum((m - mean(m))^2) / length(m))
+
+
+
+
