@@ -47,11 +47,11 @@ y_q <- quantile(y, c(0.25, 0.75))
 (iqr_y <- y_q[2] - y_q[1])
 
 # MAD
-(ad_x <- abs(x - median(x)))
-median(ad_x)
+(mad_x <- abs(x - median(x)))
+median(mad_x)
 
-(ad_y <- abs(y - median(y)))  
-median(ad_y)
+(mad_y <- abs(y - median(y)))  
+median(mad_y)
 
 # coefficient of variation
 sd_x <- sqrt(var_x)
