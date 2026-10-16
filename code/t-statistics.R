@@ -4,6 +4,7 @@ library(tidyverse)
 
 # read fish length data
 df_fl <- read_csv("data_src/data_fish_length.csv")
+df_fl
 
 # base-r
 unique(df_fl$lake)
